@@ -1,0 +1,36 @@
+def bsearch(list,item):
+
+    start=0
+    end=len(list)-1
+
+    while list[int((start+end)/2)] != item:
+        if item in list[:int((start+end)/2)]:
+            list=list[:int((start+end)/2)]
+            end = len(list) - 1
+        else:
+            list=list[int((start+end)/2):]
+            start=0
+            end=len(list)-1
+        if len(list) == 2:
+            if item == list[0]:
+                list=[list[0]]
+            else:
+                list=[list[1]]
+        if len(list) == 3:
+            if item == list[0]:
+                list = [list[0]]
+                break
+            if item == list[1]:
+                list = [list[1]]
+                break
+            if item == list[2]:
+                list = [list[2]]
+                break
+
+    return str(list)
+
+statement='What a wonderful day!'
+list1=list(statement)
+item1='W'
+
+print(bsearch(list1,item1))
