@@ -1,0 +1,5 @@
+for k in range(6):
+    for h in range(k):
+        print('*',end='')
+        if h == k-1:
+            print()

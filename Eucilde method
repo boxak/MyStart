@@ -1,0 +1,32 @@
+def Remainder(a, b):
+    if a == b:
+        print(b, "divides", a)
+    elif a > b:
+        q = 0
+        r = 0
+        while a - b * q >= 0:
+            r = a - b * q
+            q += 1
+        return r
+
+
+def Euclide(x, y):
+    xx = str(x)
+    yy = str(y)
+    if x == y:
+        print("The greatest common divisor of", x, "and", y, "is", x)
+    if x<y :
+        print("Please change order of two integers.")
+    r1 = Remainder(x, y)
+    q1 = 0
+    if x > y:
+        while r1 > 0:
+            r1 = Remainder(x, y)
+            x = y
+            y = r1
+            r1 = Remainder(x, y)
+
+        if r1 == 0:
+            print("The greatest common divisor of", xx, "and", yy, "is", y)
+
+        return r1
