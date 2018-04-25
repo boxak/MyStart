@@ -1,0 +1,70 @@
+def threeinarow(board,marker):
+    for row in board:
+        found=True
+        for c in row:
+            if c !=marker:
+                found=False
+
+        if found:
+            return True
+    return False
+
+
+
+def threeinacolumn(board,marker):
+    for c in range(len(board)):
+        found=True
+        for row in board:
+            if row[c] != marker:
+                found=False
+                break
+        if found:
+            return True
+    return False
+
+
+
+def threeinadiag(board,marker):
+    found=True
+    for c in range(len(board)):
+        if board[c][c] != marker:
+            found=False
+            break
+    if found:
+        return True
+    found=True
+    for c in range(len(board)):
+        if board[len(board)-1-c][c] !=marker:
+            found=False
+            break
+    if found:
+        return True
+    return False
+
+
+
+def findwinner(board):
+    markers=["O","X"]
+    for m in markers:
+        if threeinarow(board,m):
+            return m
+        if threeinacolumn(board,m):
+            return m
+        if threeinadiag(board,m):
+            return m
+    return None
+
+
+board1 = [["O", "" , "X"],
+ ["" , "O", "" ],
+ ["X", "" , "O"]]
+board2 = [["O", "" , "X"],
+ ["" , "O", "X"],
+ ["X", "O", "X"]]
+board3 = [["O", "" , "X"],
+ ["" , "O", "X"],
+ ["X", "O", ""]]
+board4 = [["O", "" , "X"],
+ ["" , "X", "X"],
+ ["X", "O", "O"]]
+print("Winner:", findwinner(board4))
