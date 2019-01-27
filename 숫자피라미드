@@ -1,0 +1,67 @@
+문제
+N과 시작 숫자 S가 주어지면 숫자 피라미드를 만드는 프로그램을 작성하시오. 예를 들어, N이 5이고 S가 3 이라면, 그 숫자 피라미드는
+
+    3
+   456
+  21987
+ 3456789
+987654321
+가 된다.
+
+ 
+
+입력
+입력의 첫 번째 줄에 N과 시작 숫자 S가 주어진다. ( 1≤N≤100, 1 ≤S≤ 9)
+
+ 
+
+출력
+첫 번째 줄부터 숫자 피라미드를 출력한다.
+
+ 
+
+예제 입력
+5 3
+예제 출력
+    3
+   456
+  21987
+ 3456789
+987654321
+
+
+#include <stdio.h>
+
+int main(){
+  
+  int N,S;
+  scanf("%d %d",&N,&S);
+  int series[N*N];
+  series[0]=S;
+  for(int i=1;i<N*N;i++){
+    series[i]=series[i-1]+1;
+    if(series[i]==10){
+      series[i]=1;
+    }
+  }
+  for(int j=0;j<N;j++){
+    for(int k=2;k<=N-j;k++){
+      printf(" ");
+    }
+    if(j%2==0){
+      for(int k=1;k<=(2*j+1);k++){
+        printf("%d",series[(j+1)*(j+1)-k]);
+      }
+    }
+    else {
+      for(int f=j*j;f<j*j+(2*j+1);f++){
+        printf("%d",series[f]);
+      }
+    }
+    printf("\n");
+  }
+
+  
+  
+  return 0;
+}
