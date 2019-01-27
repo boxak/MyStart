@@ -1,0 +1,35 @@
+문제
+문자열이 주어질 때, 이를 뒤집어서 출력하는 프로그램을 작성하시오.  
+
+입력
+첫 번째 줄에 문자열이 주어진다. ( 1 ≤ 문자열의 길이 ≤ 1,000 )  
+
+출력
+문자열을 뒤집은 결과를 출력한다.
+
+ 
+
+예제 입력
+Hello World!
+예제 출력
+!dlroW olleH
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+  
+  char hello[1000];
+  fgets(hello,1000,stdin);
+  int len1=strlen(hello);
+  char copy[1000];
+  
+  for(int i=0;i<len1;i++){
+    copy[i]=hello[len1-1-i];
+  }
+  copy[len1]='\0';
+  printf("%s\n",copy);
+  
+  return 0;
+}
