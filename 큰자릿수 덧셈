@@ -1,0 +1,97 @@
+문제
+두 자연수가 주어질 때 그들의 덧셈을 계산하는 프로그램을 작성하시오. 각 수는 1 이상 10^100 미만의 범위를 가진다.  
+
+입력
+첫 번째 줄과 두 번째 줄에 각각 하나의 자연수가 주어진다.  
+
+출력
+첫 번째 줄에 덧셈의 결과를 출력한다.
+
+ 
+
+예제 입력
+123112981293812938139
+1298928491101221811
+예제 출력
+124411909784914159950
+
+
+#include <stdio.h>
+#include <string.h>
+
+
+int main() {
+
+  char number[2][300];
+  scanf("%s\n%s",number[0],number[1]);
+  int number1[2][300];
+  int len1,len2,len;
+  int cnt=0;
+  int save[300]={0,};
+  len1=strlen(number[0]);
+  len2=strlen(number[1]);
+  for(int i=0;i<=1;i++){
+    for(int j=0;j<300;j++){
+      number1[0][j]=0;
+      number1[1][j]=0;
+    }
+  }
+  
+  
+  for(int j=0;j<300;j++){
+      if(number[0][j]=='\0'){
+        break;
+      }
+      else{
+        number1[0][j]=number[0][j]-48;
+      }
+  }
+  for(int j=0;j<300;j++){
+      if(number[1][j]=='\0'){
+        break;
+      }
+      else{
+        number1[1][j]=number[1][j]-48;
+      }
+  }
+  for(int i=0;i<len1;i++){
+    number1[0][i+300-len1]=number1[0][i];
+    number1[0][i]=0;
+  }
+  for(int i=0;i<len2;i++){
+    number1[1][i+300-len2]=number1[1][i];
+    number1[1][i]=0;
+  }
+  if(len2>=len1){
+    len=len2;
+  }
+  else{
+    len=len1;
+  }
+  for(int i=299;i>=300-len;i--){
+    if(number1[0][i]+number1[1][i]+cnt>=10){
+      save[i]=number1[0][i]+number1[1][i]+cnt-10;
+      cnt=1;
+    }
+    else{
+      save[i]=number1[0][i]+number1[1][i]+cnt;
+      cnt=0;
+    }
+  }
+  
+  if(cnt==1){
+    printf("%d",cnt);
+    for(int i=300-len;i<300;i++){
+      printf("%d",save[i]);
+    }
+    printf("\n");
+  }
+  else{
+    for(int i=300-len;i<300;i++){
+      printf("%d",save[i]);
+    }
+    printf("\n");
+  }
+  
+  return 0;
+}
