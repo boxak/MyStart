@@ -1,0 +1,138 @@
+문제
+두 자연수가 주어질 때 그들의 뺄셈을 계산하는 프로그램을 작성하시오. 각 수는 1 이상 10^100 미만의 범위를 가진다.  
+
+입력
+첫 번째 줄과 두 번째 줄에 각각 하나의 자연수가 주어진다.  
+
+출력
+첫 번째 줄에 뺄셈의 결과를 출력한다.  
+
+예제 입력
+1962831868293922
+2528838232
+예제 출력
+1962829339455690
+ 
+
+예제 입력
+18592918185
+2195812983912895799129
+예제 출력
+-2195812983894302880944
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+  
+  char number[2][300];
+  scanf("%s\n%s",number[0],number[1]);
+  int number1[2][300];
+  int len1,len2,len;
+  int cnt=0;
+  int save[300]={0,};
+  len1=strlen(number[0]);
+  len2=strlen(number[1]);
+  for(int i=0;i<=1;i++){
+    for(int j=0;j<300;j++){
+      number1[0][j]=0;
+      number1[1][j]=0;
+    }
+  }
+  if(len2>len1){
+    len=len2;
+  }
+  else{
+    len=len1;
+  }
+  
+  for(int j=0;j<300;j++){
+      if(number[0][j]=='\0'){
+        break;
+      }
+      else{
+        number1[0][j]=number[0][j]-48;
+      }
+  }
+  for(int j=0;j<300;j++){
+      if(number[1][j]=='\0'){
+        break;
+      }
+      else{
+        number1[1][j]=number[1][j]-48;
+      }
+  }
+  for(int i=0;i<len1;i++){
+    number1[0][i+300-len1]=number1[0][i];
+    number1[0][i]=0;
+  }
+  for(int i=0;i<len2;i++){
+    number1[1][i+300-len2]=number1[1][i];
+    number1[1][i]=0;
+  }
+  if(len2>len1){
+    int temp[300];
+    for(int i=0;i<300;i++){
+      temp[i]=number1[0][i];
+    }
+    for(int i=0;i<300;i++){
+      number1[0][i]=number1[1][i];
+    }
+    for(int i=0;i<300;i++){
+      number1[1][i]=temp[i];
+    }
+    printf("-");
+  }
+  else if(len2==len1){
+    bool flag=false;
+    for(int i=0;i<300;i++){
+      if(number1[0][i]!=number1[1][i]){
+        if(number1[0][i]<number1[1][i]){
+          flag=true;
+        }
+        break;
+      }
+    }
+    if(flag==true){
+      int temp[300];
+      for(int i=0;i<300;i++){
+        temp[i]=number1[0][i];
+      }
+      for(int i=0;i<300;i++){
+        number1[0][i]=number1[1][i];
+      }
+      for(int i=0;i<300;i++){
+        number1[1][i]=temp[i];
+      }
+      printf("-");
+    }
+  }
+  
+  for(int i=299;i>=300-len;i--){
+    if(number1[0][i]+cnt>=number1[1][i]){
+      save[i]=number1[0][i]+cnt-number1[1][i];
+      cnt=0;
+    }
+    else if(number1[0][i]+cnt<number1[1][i]){
+      save[i]=number1[0][i]+cnt+10-number[1][i];
+      cnt=-1;
+    }
+  }
+  if(save[300-len]==0){
+    for(int i=300-len+1;i<300;i++){
+      printf("%d",save[i]);
+    }
+    printf("\n");
+  }
+  else{
+    for(int i=300-len;i<300;i++){
+      printf("%d",save[i]);
+    }
+    printf("\n");
+  }
+  
+
+
+  return 0;
+}
