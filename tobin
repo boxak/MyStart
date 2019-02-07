@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+void tobin(int arr[],int n,int k,int trigger){
+  
+  if(n==1){
+    for(int i=0;i<(trigger-1);i++){
+      printf("%d",arr[i]);
+    }
+    if(k==1){
+      printf("1\n");
+    }
+    else{
+      printf("0\n");
+    }
+  }
+  
+  else if(k==0){
+    for(int i=0;i<(trigger-n);i++){
+      printf("%d",arr[i]);
+    }
+    for(int i=0;i<n;i++){
+      printf("0");
+    }
+    printf("\n");
+  }
+  else if(n==k){
+    for(int i=0;i<(trigger-n);i++){
+      printf("%d",arr[i]);
+    }
+    for(int i=0;i<n;i++){
+      printf("1");
+    }
+    printf("\n");
+  }
+  else{
+    arr[trigger-n]=1;
+    tobin(arr,n-1,k-1,trigger);
+    arr[trigger-n]=0;
+    tobin(arr,n-1,k,trigger);
+  }
+}
+
+int main() {
+
+  int n,k;
+  scanf("%d %d",&n,&k);
+  int trigger=n;
+  int arr[trigger];
+  tobin(arr,n,k,trigger);
+  
+  return 0;
+}
